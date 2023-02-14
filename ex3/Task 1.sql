@@ -1,3 +1,5 @@
+--Task 1--
+
 /*
 Question A
 
@@ -106,6 +108,4 @@ WHERE artistID = 2;
 
 DELETE FROM artist
 WHERE artistID = 2;
-
-
 

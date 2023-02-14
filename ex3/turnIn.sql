@@ -109,3 +109,88 @@ WHERE artistID = 2;
 
 
 
+--Task 2--
+
+--Question A
+SELECT songID, name_, duration_, year_ artistID FROM song;
+
+--Question B
+SELECT name_, year_ FROM album WHERE year_ < 2017; 
+
+--Question C
+SELECT name_, year_ FROM song WHERE 2018 < year_ /*<= 2020*/; 
+
+--Question D
+
+
+--Question E
+
+
+--Question F
+
+--Question G
+
+
+--Question H
+
+--Task 4--
+
+--Qustion A
+
+/*
+We would need to change eight  cells, four cells chaing 
+the year, and four cells chaning the name.
+*/
+
+--Question B
+
+/*
+We could implement a directorDatabase
+*/
+
+
+CREATE TABLE director(
+    directorID          INT NOT NULL,
+    directorName        VARCHAR(256) NOT NULL,
+    directorBirthYear   INT NOT NULL,
+
+    CONSTRAINT directorNamePK PRIMARY KEY (directorNameID),
+);
+
+--Task 5--
+
+/*
+Q1: A -> A
+A:Yes - An = An
+
+Q2: A-> B
+A:No An =/= Bn 
+
+Q3: A-> C
+A:Yes Cn = An
+
+Q4: AB -> C
+A:No, if Cn = An * Bn * Kn 
+
+Q5: C -> D
+A:No Cn =/= Dn
+
+Q6: D -> C
+A:No Dn =/= Cn
+
+Q7: ABCD is a superkey for the table
+A:True
+
+Q8: ABC is a superkey for the table
+A:
+
+Q9: D is a candidate key for the table
+A:
+
+Q:10 ABD is a candidate key for the table
+A:
+
+*/
+
+
+--Question B
