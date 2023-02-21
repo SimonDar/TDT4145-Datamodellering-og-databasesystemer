@@ -31,6 +31,7 @@ WHERE artist.name = "Ty Dolla Sign"
 ORDER BY artist.name, song.name ASC;
 
 --Question G
+
 SELECT song.name as songName, artist.name as artistName
 FROM album 
 INNER JOIN  song ON album.songID = song.songID
