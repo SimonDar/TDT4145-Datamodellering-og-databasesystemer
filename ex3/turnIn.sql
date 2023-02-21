@@ -112,16 +112,19 @@ WHERE artistID = 2;
 --Task 2--
 
 --Question A
-SELECT songID, name_, duration_, year_ artistID FROM song;
+SELECT songID, name, duration, year, artistID FROM song;
 
 --Question B
-SELECT name_, year_ FROM album WHERE year_ < 2017; 
+SELECT name, year FROM album WHERE year < 2017; 
 
 --Question C
-SELECT name_, year_ FROM song WHERE 2018 < year_ /*<= 2020*/; 
+SELECT name, year FROM song WHERE 2018 < year <= 2020; 
 
 --Question D
-
+SELECT artist.name
+FROM featuredOn
+INNER JOIN artist ON featuredOn.artistID=artist.artistID,
+INNER JOIN artist ON featuredOn.songID=song.songID;
 
 --Question E
 
