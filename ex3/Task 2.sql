@@ -35,4 +35,5 @@ ORDER BY artist.name, song.name ASC;
 SELECT song.name as songName, artist.name as artistName
 FROM album 
 INNER JOIN  song ON album.songID = song.songID
-INNER JOIN artist ON album.artistID = artist.artistID;
+INNER JOIN artist ON album.artistID = artist.artistID
+WHERE song.name = "%the%";
