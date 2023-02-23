@@ -15,12 +15,12 @@ INNER JOIN song ON featuredOn.songID=song.songID
 ORDER BY artist.name, song.name ASC;
 
 --Question E
-SELECT song.name as songName, album.name as albumName, song.year
+SELECT DISTINCT song.name as songName, album.name as albumName, song.year
 FROM song
 INNER JOIN album ON song.artistID = album.artistID
 INNER JOIN artist ON song.artistID = artist.artistID
 WHERE artist.name = "Ariana Grande"
-ORDER BY song.name, album.name, song.year DESC;
+ORDER BY song.year, album.name, song.name  DESC;
 
 --Question F
 SELECT song.name as songName, artist.name as artistName
@@ -31,9 +31,15 @@ WHERE artist.name = "Ty Dolla Sign"
 ORDER BY artist.name, song.name ASC;
 
 --Question G
-
 SELECT song.name as songName, artist.name as artistName
 FROM album 
-INNER JOIN  song ON album.songID = song.songID
+INNER JOIN  song ON album.artistID = song.artistID
 INNER JOIN artist ON album.artistID = artist.artistID
 WHERE song.name = "%the%";
+
+--Question H
+SELECT artist.name, count(featuredOn.artistID) as amount
+FROM featuredOn
+INNER JOIN artist ON featuredOn.artistID = artist.artistID
+GROUP BY artist.name
+ORDER by amount DESC;

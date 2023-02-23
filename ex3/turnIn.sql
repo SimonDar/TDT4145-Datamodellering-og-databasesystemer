@@ -1,3 +1,5 @@
+----Task 2----
+
 /*
 Question A
 
@@ -109,7 +111,7 @@ WHERE artistID = 2;
 
 
 
---Task 2--
+----Task 2----
 
 --Question A
 SELECT songID, name, duration, year, artistID FROM song;
@@ -118,25 +120,49 @@ SELECT songID, name, duration, year, artistID FROM song;
 SELECT name, year FROM album WHERE year < 2017; 
 
 --Question C
-SELECT name, year FROM song WHERE 2018 < year <= 2020; 
+SELECT name, year FROM song WHERE 2018 < year AND year <= 2020; 
 
 --Question D
-SELECT artist.name
+SELECT artist.name, song.name
 FROM featuredOn
-INNER JOIN artist ON featuredOn.artistID=artist.artistID,
-INNER JOIN artist ON featuredOn.songID=song.songID;
+INNER JOIN artist ON featuredOn.artistID=artist.artistID
+INNER JOIN song ON featuredOn.songID=song.songID
+ORDER BY artist.name, song.name ASC;
 
 --Question E
-
+SELECT DISTINCT song.name as songName, album.name as albumName, song.year
+FROM song
+INNER JOIN album ON song.artistID = album.artistID
+INNER JOIN artist ON song.artistID = artist.artistID
+WHERE artist.name = "Ariana Grande"
+ORDER BY song.year, album.name, song.name  DESC;
 
 --Question F
+SELECT song.name as songName, artist.name as artistName
+FROM artist
+INNER JOIN song on artist.artistID = song.artistID 
+INNER JOIN featuredOn on featuredOn.artistID = artist.artistID
+WHERE artist.name = "Ty Dolla Sign"
+ORDER BY artist.name, song.name ASC;
 
 --Question G
-
+SELECT song.name as songName, artist.name as artistName
+FROM album 
+INNER JOIN  song ON album.artistID = song.artistID
+INNER JOIN artist ON album.artistID = artist.artistID
+WHERE song.name = "%the%";
 
 --Question H
+SELECT artist.name, count(featuredOn.artistID) as amount
+FROM featuredOn
+INNER JOIN artist ON featuredOn.artistID = artist.artistID
+GROUP BY artist.name
+ORDER by amount DESC;
 
---Task 4--
+----Task 3----
+
+----Task 4----
+
 
 --Qustion A
 
@@ -160,7 +186,7 @@ CREATE TABLE director(
     CONSTRAINT directorNamePK PRIMARY KEY (directorNameID),
 );
 
---Task 5--
+----Task 5----
 
 /*
 Q1: A -> A
