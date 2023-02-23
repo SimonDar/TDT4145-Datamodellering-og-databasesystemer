@@ -1,9 +1,23 @@
 /*
+███████╗██╗  ██╗███████╗██████╗  ██████╗██╗███████╗███████╗    ██████╗ 
+██╔════╝╚██╗██╔╝██╔════╝██╔══██╗██╔════╝██║██╔════╝██╔════╝    ╚════██╗
+█████╗   ╚███╔╝ █████╗  ██████╔╝██║     ██║███████╗█████╗       █████╔╝
+██╔══╝   ██╔██╗ ██╔══╝  ██╔══██╗██║     ██║╚════██║██╔══╝       ╚═══██╗
+███████╗██╔╝ ██╗███████╗██║  ██║╚██████╗██║███████║███████╗    ██████╔╝
+╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝╚══════╝╚══════╝    ╚═════╝ 
+
+TDT4145 - Data Modeling, Databases and Database Management
+23/02/23 - Frida Eriksen Næss, Johanna Wilmers and Simon Dargahi
+*/
+
+
+ 
+/*
 ████████  █████  ███████ ██   ██      ██ 
    ██    ██   ██ ██      ██  ██      ███ 
    ██    ███████ ███████ █████        ██ 
    ██    ██   ██      ██ ██  ██       ██ 
-   ██    ██   ██ ███████ ██   ██      ██                                          
+   ██    ██   ██ ███████ ██   ██      ██
 */
 
 
@@ -14,8 +28,6 @@ of a atribude when using "on delete cascade"
 */
 
 ------------ Question B Start ------------
-
-
 CREATE TABLE artist(
     artistID    INT NOT NULL,
     name       VARCHAR(256) NOT NULL,
@@ -176,7 +188,7 @@ ORDER by amount DESC;
    ██    ██   ██ ██      ██  ██           ██ 
    ██    ███████ ███████ █████        █████  
    ██    ██   ██      ██ ██  ██           ██ 
-   ██    ██   ██ ███████ ██   ██     ██████                                                                                 
+   ██    ██   ██ ███████ ██   ██     ██████
 */
 
 ------------ Question A Start ------------
@@ -251,49 +263,64 @@ CREATE TABLE director(
 ------------ Question A Start ------------
 /*
 Q1: A -> A
-A1: Yes - An = An
-A2: A -> A Ja, forsi a alltid er lik som seg selv 
+    A1: Yes - An = An
+    A2: A -> A Ja, forsi a alltid er lik som seg selv 
 
 Q2: A-> B
-A1: No An =/= Bn 
-A2: A -> B Stemmer ikke, siden de tre siste radene ikke samsvarer med dette. Når A er a3er b både b3 og b4, og B er også b4 når a er a4. 
+    A1: No An =/= Bn 
+    A2: A -> B Stemmer ikke, siden de tre siste radene ikke samsvarer med dette. 
+        Når A er a3er b både b3 og b4, og B er også b4 når a er a4. 
 
 Q3: A-> C
-A1: Yes Cn = An
-A2: A -> C- Dette stemmer. Alle c-ene i tabeller har samme nummer som sine a-er. 
+    A1: Yes Cn = An
+    A2: A -> C- Dette stemmer. Alle c-ene i tabeller har 
+        samme nummer som sine a-er. 
 
 Q4: AB -> C
-A1: No, if Cn = An * Bn * Kn 
-A2: AB -> C- Kan stemme. I tabellen er det ingen c-verdier som har forskjellige verdier  for samme kombinasjon av AB 
+    A1: No, if Cn = An * Bn * Kn 
+    A2: AB -> C- Kan stemme. I tabellen er det ingen c-verdier 
+        som har forskjellige verdier  for samme kombinasjon av AB 
 
 Q5: C -> D
-A1: No Cn =/= Dn
-A2: C -> D- Stemmer ikke. Eksempelvis er c1 både d1 og d1 i rad 1 og 2. 
+    A1: No Cn =/= Dn
+    A2: C -> D- Stemmer ikke. Eksempelvis er c1 både d1 og d1 i rad 1 og 2. 
 
 Q6: D -> C
-A1: No Dn =/= Cn
-A2: D -> C- Det er rader i tabellen med forskjellige d- verdier til samme c- verdi så denne stemmer ikke.m
+    A1: No Dn =/= Cn
+    A2: D -> C- Det er rader i tabellen med forskjellige d- verdier til 
+        samme c- verdi så denne stemmer ikke.m
 
-Q7:     ABCD is a superkey for the table
-A:      ABCD er en supernøkkel for tabellen- stemmer ikke
+Q7: ABCD is a superkey for the table
+    A:      ABCD er en supernøkkel for tabellen- stemmer ikke
 
-Q8:     ABC is a superkey for the table
-A:      ABC er en supernøkkel for tabellen- kan stemme, da det ikke finnes noen duplikater i ABC-kolonnen, og dermed vil ABC-kolonnen være unik for hver rad i tabellen.
+Q8: ABC is a superkey for the table
+    A:      ABC er en supernøkkel for tabellen- kan stemme, 
+        da det ikke finnes noen duplikater i ABC-kolonnen, 
+        og dermed vil ABC-kolonnen være unik for hver rad i tabellen.
 
-Q9:     D is a candidate key for the table
-A:      D er en kandidatnøkkel for tabellen- usant, siden det finnes duplikater i d-kolonnen
+Q9: D is a candidate key for the table
+    A:      D er en kandidatnøkkel for tabellen- usant, 
+        siden det finnes duplikater i d-kolonnen
 
-Q10:    ABD is a candidate key for the table
-A:      ABD er en kandidatnøkkel for tabellen- sant, det finnes ingen duplikater av abd i tabellen 
+Q10 ABD is a candidate key for the table
+    A:      ABD er en kandidatnøkkel for tabellen- sant, 
+        det finnes ingen duplikater av abd i tabellen 
 /*
 
 
 ------------ Question B Start ------------
 Given the table R = {A, B, C, D} and F = {D -> A, B-> D, ABD -> C}.
-Find D+, BC+, AB+, BD+. How many candidate keys does R have?
+Find D+, BC+, AB+, BD+. How many candidateKeys does R have?
 
-D+  =    D -> A     =   {A, D}
-BC+ =       =   ABCD
-AB+ =       =   ABCD
-BD+ =       =   ABCD
+--The frist alternative is a candiateKeys
+D+  =   AD     =   {A, D}  
 
+--The rest are superKeys
+BC+ =   BCD+    =   ABCD =   {A, B, C, D}
+AB+ =   ABD+    =   ABCD =   {A, B, C, D}
+BD+ =   ADB+    =   ABCD =   {A, B, C, D}
+
+/*
+Other candidateKeys are B+, this is because B is not on the right side of any
+of the others. Anything else would be considerd superkeys.
+*/
