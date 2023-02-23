@@ -1,6 +1,6 @@
 --a)
 
-DROP TABLE songsWithoutAlbums;
+DROP TABLE songsWithoutAlbums; --ikke den av oppgaven, men har med for å ikke måtte kommentere ut 4-9
 CREATE TABLE songsWithoutAlbums as
 SELECT artist.name AS artistName, song.name AS songName
 FROM song
@@ -11,11 +11,13 @@ WHERE albumID IS NULL;
 
 
 --b)
-SELECT artist.name AS artistName, song.name AS songName
+SELECT artist.name AS artistName, song.name AS songName, song.year as songYear
 FROM featuredOn
 INNER JOIN song ON featuredOn.songID = song.songID
 JOIN artist ON featuredOn.artistID = artist.artistID
-WHERE (artist.name LIKE 'B%') OR (song.year BETWEEN 2000 AND 2009);
+WHERE  2000 <= song.year AND song.year <= 2009
+    OR artist.name LIKE 'B%';
+
 
 --c)
 SELECT artist.name AS artistName, COUNT(song.songID) AS numSongs

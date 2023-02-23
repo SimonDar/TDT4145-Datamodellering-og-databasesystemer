@@ -5,7 +5,7 @@ SELECT songID, name, duration, year, artistID FROM song;
 SELECT name, year FROM album WHERE year < 2017; 
 
 --Question C
-SELECT name, year FROM song WHERE 2018 < year <= 2020; 
+SELECT name, year FROM song WHERE 2018 < year AND year <= 2020; 
 
 --Question D
 SELECT artist.name, song.name
