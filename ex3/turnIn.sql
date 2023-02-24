@@ -27,6 +27,8 @@ By using foreign key konstants, one will delete relations
 of a atribude when using "on delete cascade"
 */
 
+
+
 ------------ Question B Start ------------
 CREATE TABLE artist(
     artistID    INT NOT NULL,
