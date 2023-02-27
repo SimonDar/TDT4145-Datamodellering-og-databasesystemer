@@ -13,7 +13,6 @@ from Hund
 Where rase Like "P%"
 
 
-
 --Spørring med on 
 SELECT Hund.Regnr, Navn 
 FROM Hund INNER JOIN BittAv ON Hund.Regnr = BittAv.Regnr 
