@@ -35,14 +35,14 @@ CREATE TABLE Operator(
 
 CREATE TABLE Ordre(
     IDordre INT NOT NULL,
-    UnixTid INT NOT NULL,
-    Setenr INT NOT NULL,
+    UnixKjopt INT NOT NULL,
+  --Plassnr INT NOT NULL,
     IDkunde INT NOT NULL,
     PRIMARY KEY(IDordre),
     CONSTRAINT ordre_idkunde_foreign FOREIGN KEY(IDkunde) REFERENCES Kunde(IDkunde)
 );
-CREATE INDEX ordre_idkunde_unixtid_index ON
-    Ordre(IDkunde, UnixTid);
+CREATE INDEX ordre_idkunde_unixKjopt_index ON
+    Ordre(IDkunde, UnixKjopt);
 CREATE INDEX ordre_idkunde_index ON
     Ordre(IDkunde);
 CREATE TABLE Kunderegister(
@@ -71,22 +71,17 @@ CREATE TABLE Vognoppsett(
 
 CREATE TABLE Togforekomst(
     IDtogrute INT NOT NULL,
-    klokkeslettStart INT NOT NULL,
-    man BOOLEAN NOT NULL,
-    tir BOOLEAN NOT NULL,
-    ons BOOLEAN NOT NULL,
-    tor BOOLEAN NOT NULL,
-    fre BOOLEAN NOT NULL,
-    lor BOOLEAN NOT NULL,
-    son BOOLEAN NOT NULL,
+  --klokkeslettStart INT NOT NULL,
+    dag VARCHAR(8)  NOT NULL,
     CONSTRAINT togforekomst_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute)
 );
 CREATE TABLE OkuperteSeter(
     IDstrekning INT NOT NULL,
-    IDordre INT NOT NULL,
-    Setenummer INT NOT NULL,
+    IDordre INT NULL,
+    Plassnr INT NOT NULL,
+    Sengeplass BOOLEAN NOT NULL,
     CONSTRAINT okuperteseter_idstrekning_foreign FOREIGN KEY(IDstrekning) REFERENCES Strekning(IDstrekning),
-    CONSTRAINT okuperteseter_setenummer_foreign FOREIGN KEY(Setenummer) REFERENCES Ordre(Setenr),
+  --CONSTRAINT okuperteseter_Plassnr_foreign FOREIGN KEY(Plassnr) REFERENCES Ordre(Plassnr),
     CONSTRAINT okuperteseter_idordre_foreign FOREIGN KEY(IDordre) REFERENCES Ordre(IDordre)
 );
 CREATE INDEX okuperteseter_idstrekning_index ON
@@ -104,7 +99,7 @@ CREATE TABLE Togrute(
     IDtogrute INT NOT NULL,
     IDbaneStrekning INT NOT NULL,
     Hovedretning BOOLEAN NOT NULL,
-    Hastighet BIGINT NOT NULL,
+    --Hastighet BIGINT NOT NULL,
     PRIMARY KEY(IDtogrute),
     CONSTRAINT togrute_idbanestrekning_foreign FOREIGN KEY(IDbaneStrekning) REFERENCES Banestrekning(IDbaneStrekning)
 );
@@ -112,14 +107,12 @@ CREATE TABLE Togrute(
 CREATE TABLE Strekning(
     IDtogrute INT NOT NULL,
     IDstrekning INT NOT NULL,
-    Dag INT NOT NULL,
+    UnixAvgang INT NOT NULL,
     FirstStrekning BOOLEAN NOT NULL,
-    IDdelstrekFra INT NOT NULL,
-    IDdelstrekTil INT NULL,
+    IDdelStrekning INT NOT NULL,
     totalplasser INT NOT NULL,
     PRIMARY KEY(IDstrekning),
-    CONSTRAINT strekning_iddelstrekfra_foreign FOREIGN KEY(IDdelstrekFra) REFERENCES Delstrekning(StasjonFra),
-    CONSTRAINT strekning_iddelstrektil_foreign FOREIGN KEY(IDdelstrekTil) REFERENCES Delstrekning(StasjonTil),
+    CONSTRAINT strekning_IDdelStrekning_foreign FOREIGN KEY(IDdelStrekning) REFERENCES Delstrekning(IDdelStrekning),
     CONSTRAINT strekning_totalplasser_foreign FOREIGN KEY(totalplasser) REFERENCES Vognoppsett(totalplasser),
     CONSTRAINT strekning_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute)
 );
@@ -134,6 +127,7 @@ CREATE TABLE Delstrekning(
     StasjonFirst BOOLEAN NOT NULL,
     StasjonFra VARCHAR(255) NOT NULL,
     StasjonTil VARCHAR(255) NOT NULL,
+    PRIMARY KEY(IDdelStrekning),
     CONSTRAINT delstrekning_stasjonfra_foreign FOREIGN KEY(StasjonFra) REFERENCES Jernbanestasjon(NavnStasjon),
     CONSTRAINT delstrekning_stasjontil_foreign FOREIGN KEY(StasjonTil) REFERENCES Jernbanestasjon(NavnStasjon)
 );
@@ -142,6 +136,7 @@ CREATE TABLE VognTyoe(
     Sitteplass BOOLEAN NOT NULL,
     FirstVogn BOOLEAN NOT NULL,
     IDvognTypeNeste INT NULL,
+    totalplasser INT NOT NULL,
     CONSTRAINT vogntyoe_idvogntypeneste_foreign FOREIGN KEY(IDvognTypeNeste) REFERENCES VognTyoe(IDvognOppsett),
     CONSTRAINT vogntyoe_idvognoppsett_foreign FOREIGN KEY(IDvognOppsett) REFERENCES Vognoppsett(IDvognOppsett)
 );
@@ -171,7 +166,7 @@ ALTER TABLE
 ALTER TABLE
     Strekning ADD CONSTRAINT strekning_iddelstrekfra_foreign FOREIGN KEY(IDdelstrekFra) REFERENCES Delstrekning(StasjonFra);
 ALTER TABLE
-    OkuperteSeter ADD CONSTRAINT okuperteseter_setenummer_foreign FOREIGN KEY(Setenummer) REFERENCES Ordre(Setenr);
+    OkuperteSeter ADD CONSTRAINT okuperteseter_Plassnr_foreign FOREIGN KEY(Plassnr) REFERENCES Ordre(Plassnr);
 ALTER TABLE
     Togforekomst ADD CONSTRAINT togforekomst_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute);
 ALTER TABLE
