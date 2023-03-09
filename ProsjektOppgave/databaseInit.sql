@@ -53,9 +53,11 @@ CREATE TABLE Kunderegister(
 );
 CREATE TABLE Banestrekning(
     IDbaneStrekning INT NOT NULL,
-    NavnBaneStrekning INT NOT NULL,
+    NavnBaneStrekning VARCHAR(255) NOT NULL,
     CONSTRAINT PKbaneStrekning PRIMARY KEY(IDbaneStrekning)
 );
+
+--INSERT INTO Banestrekning VALUES(1, 'test');
 
 CREATE TABLE Vognoppsett(
     IDvognOppsett INT NOT NULL,
@@ -68,6 +70,7 @@ CREATE TABLE Vognoppsett(
      CONSTRAINT vognoppsett_idtogrute_unique UNIQUE(IDtogrute),
      CONSTRAINT vognoppsett_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute)
 );
+
 
 CREATE TABLE Togforekomst(
     IDtogrute INT NOT NULL,
@@ -146,47 +149,9 @@ CREATE INDEX vogntyoe_idvognoppsett_index ON
 CREATE TABLE Jernbanestasjon(
     IDbaneStrekning INT NOT NULL,
     NavnStasjon VARCHAR(255) NOT NULL,
-    MOH INT NOT NULL,
+    MOH FLOAT NOT NULL,
     PRIMARY KEY(NavnStasjon),
     CONSTRAINT jernbanestasjon_idbanestrekning_foreign FOREIGN KEY(IDbaneStrekning) REFERENCES Banestrekning(IDbaneStrekning)
 );
-/*
-ALTER TABLE
-    OkuperteSeter ADD CONSTRAINT okuperteseter_idstrekning_foreign FOREIGN KEY(IDstrekning) REFERENCES Strekning(IDstrekning);
-ALTER TABLE
-    Delstrekning ADD CONSTRAINT delstrekning_stasjonfra_foreign FOREIGN KEY(StasjonFra) REFERENCES Jernbanestasjon(NavnStasjon);
-ALTER TABLE
-    Ordre ADD CONSTRAINT ordre_idkunde_foreign FOREIGN KEY(IDkunde) REFERENCES Kunde(IDkunde);
-ALTER TABLE
-    VognTyoe ADD CONSTRAINT vogntyoe_idvogntypeneste_foreign FOREIGN KEY(IDvognTypeNeste) REFERENCES VognTyoe(IDvognOppsett);
-ALTER TABLE
-    Kunderegister ADD CONSTRAINT kunderegister_idkunde_foreign FOREIGN KEY(IDkunde) REFERENCES Kunde(IDkunde);
-ALTER TABLE
-    Operator ADD CONSTRAINT operator_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute);
-ALTER TABLE
-    Strekning ADD CONSTRAINT strekning_iddelstrekfra_foreign FOREIGN KEY(IDdelstrekFra) REFERENCES Delstrekning(StasjonFra);
-ALTER TABLE
-    OkuperteSeter ADD CONSTRAINT okuperteseter_Plassnr_foreign FOREIGN KEY(Plassnr) REFERENCES Ordre(Plassnr);
-ALTER TABLE
-    Togforekomst ADD CONSTRAINT togforekomst_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute);
-ALTER TABLE
-    VognTyoe ADD CONSTRAINT vogntyoe_idvognoppsett_foreign FOREIGN KEY(IDvognOppsett) REFERENCES Vognoppsett(IDvognOppsett);
-ALTER TABLE
-    Kunderegister ADD CONSTRAINT kunderegister_idoperator_foreign FOREIGN KEY(IDoperator) REFERENCES Operator(IDoperator);
-ALTER TABLE
-    Delstrekning ADD CONSTRAINT delstrekning_stasjontil_foreign FOREIGN KEY(StasjonTil) REFERENCES Jernbanestasjon(NavnStasjon);
-ALTER TABLE
-    Jernbanestasjon ADD CONSTRAINT jernbanestasjon_idbanestrekning_foreign FOREIGN KEY(IDbaneStrekning) REFERENCES Banestrekning(IDbaneStrekning);
-ALTER TABLE
-    OkuperteSeter ADD CONSTRAINT okuperteseter_idordre_foreign FOREIGN KEY(IDordre) REFERENCES Ordre(IDordre);
-ALTER TABLE
-    Strekning ADD CONSTRAINT strekning_iddelstrektil_foreign FOREIGN KEY(IDdelstrekTil) REFERENCES Delstrekning(StasjonTil);
-ALTER TABLE
-    Strekning ADD CONSTRAINT strekning_totalplasser_foreign FOREIGN KEY(totalplasser) REFERENCES Vognoppsett(totalplasser);
-ALTER TABLE
-    Vognoppsett ADD CONSTRAINT vognoppsett_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute);
-ALTER TABLE
-    Togrute ADD CONSTRAINT togrute_idbanestrekning_foreign FOREIGN KEY(IDbaneStrekning) REFERENCES Banestrekning(IDbaneStrekning);
-ALTER TABLE
-    Strekning ADD CONSTRAINT strekning_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute);
-*/
+
+

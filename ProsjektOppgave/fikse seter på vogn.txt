@@ -1,8 +1,0 @@
-*fikse seter på vogn
-*iddelstrekning nøkkel
-*sløyfe iddelstrekning fratil id under strekning
-bool seng 
-klokkeslett under strekning
-omformulere okuperte seter så det gir mer mening at det er senger også
-Tre rad isteden for array under togforekomst. fiks
-ta høyde til normalform.
