@@ -36,7 +36,6 @@ CREATE TABLE Operator(
 CREATE TABLE Ordre(
     IDordre INT NOT NULL,
     UnixKjopt INT NOT NULL,
-  --Plassnr INT NOT NULL,
     IDkunde INT NOT NULL,
     PRIMARY KEY(IDordre),
     CONSTRAINT ordre_idkunde_foreign FOREIGN KEY(IDkunde) REFERENCES Kunde(IDkunde)
@@ -57,7 +56,6 @@ CREATE TABLE Banestrekning(
     CONSTRAINT PKbaneStrekning PRIMARY KEY(IDbaneStrekning)
 );
 
---INSERT INTO Banestrekning VALUES(1, 'test');
 
 CREATE TABLE Vognoppsett(
     IDvognOppsett INT NOT NULL,
@@ -66,16 +64,17 @@ CREATE TABLE Vognoppsett(
     AntallSoveplasser INT NOT NULL,
     AntallSitteplasser INT NOT NULL,
     totalplasser INT NOT NULL,
-     PRIMARY KEY(IDvognOppsett),
-     CONSTRAINT vognoppsett_idtogrute_unique UNIQUE(IDtogrute),
-     CONSTRAINT vognoppsett_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute)
+    PRIMARY KEY(IDvognOppsett),
+    CONSTRAINT vognoppsett_idtogrute_unique UNIQUE(IDtogrute),
+    CONSTRAINT vognoppsett_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute)
 );
 
 
 CREATE TABLE Togforekomst(
+    IDtogforekomst INT NOT NULL,
     IDtogrute INT NOT NULL,
-  --klokkeslettStart INT NOT NULL,
     dag VARCHAR(8)  NOT NULL,
+    PRIMARY KEY(IDtogforekomst),
     CONSTRAINT togforekomst_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute)
 );
 CREATE TABLE OkuperteSeter(
@@ -84,7 +83,6 @@ CREATE TABLE OkuperteSeter(
     Plassnr INT NOT NULL,
     Sengeplass BOOLEAN NOT NULL,
     CONSTRAINT okuperteseter_idstrekning_foreign FOREIGN KEY(IDstrekning) REFERENCES Strekning(IDstrekning),
-  --CONSTRAINT okuperteseter_Plassnr_foreign FOREIGN KEY(Plassnr) REFERENCES Ordre(Plassnr),
     CONSTRAINT okuperteseter_idordre_foreign FOREIGN KEY(IDordre) REFERENCES Ordre(IDordre)
 );
 CREATE INDEX okuperteseter_idstrekning_index ON
@@ -102,7 +100,6 @@ CREATE TABLE Togrute(
     IDtogrute INT NOT NULL,
     IDbaneStrekning INT NOT NULL,
     Hovedretning BOOLEAN NOT NULL,
-    --Hastighet BIGINT NOT NULL,
     PRIMARY KEY(IDtogrute),
     CONSTRAINT togrute_idbanestrekning_foreign FOREIGN KEY(IDbaneStrekning) REFERENCES Banestrekning(IDbaneStrekning)
 );
@@ -111,6 +108,7 @@ CREATE TABLE Strekning(
     IDtogrute INT NOT NULL,
     IDstrekning INT NOT NULL,
     UnixAvgang INT NOT NULL,
+    UnixAnnkomst INT NOT NULL,
     FirstStrekning BOOLEAN NOT NULL,
     IDdelStrekning INT NOT NULL,
     totalplasser INT NOT NULL,
@@ -136,11 +134,13 @@ CREATE TABLE Delstrekning(
 );
 CREATE TABLE VognTyoe(
     IDvognOppsett INT NOT NULL,
+    IDvognType INT NOT NULL,
     Sitteplass BOOLEAN NOT NULL,
     FirstVogn BOOLEAN NOT NULL,
     IDvognTypeNeste INT NULL,
     totalplasser INT NOT NULL,
-    CONSTRAINT vogntyoe_idvogntypeneste_foreign FOREIGN KEY(IDvognTypeNeste) REFERENCES VognTyoe(IDvognOppsett),
+    PRIMARY KEY(IDvognType),
+    CONSTRAINT vogntyoe_idvogntypeneste_foreign FOREIGN KEY(IDvognTypeNeste) REFERENCES VognTyoe(IDvognType),
     CONSTRAINT vogntyoe_idvognoppsett_foreign FOREIGN KEY(IDvognOppsett) REFERENCES Vognoppsett(IDvognOppsett)
 );
 CREATE INDEX vogntyoe_idvognoppsett_index ON

@@ -1,3 +1,5 @@
+
+
 import sqlite3
 
 db_connect = sqlite3.connect("bane-vest.db")
@@ -5,11 +7,13 @@ db = db_connect.cursor()
 
 
 bane = ["Nordlandsbanen"]
-NavnStasjon = ["Trondheim", "Steinkjer", "Mosjoen", "Mo i Rana", "Fauske", "Bodo"]
+NavnStasjon = ["Trondheim S", "Steinkjer", "Mosjoen", "Mo i Rana", "Fauske", "Bodo"]
 Moh = [1.5, 3.6, 6.8, 3.5, 34.0, 4.1]
 
 Enkeltspor= [True, False, False, False, False]
 AvstandKM = [120,280,90,170,60]
+
+
 
 for i in range(0, len(bane)): #Starter først å itterere gjennom banene
     print("INSERT INTO Banestrekning VALUES({0}, '{1}');".format((i+1), bane[i]))
