@@ -24,12 +24,14 @@ INSERT INTO Togforekomst VALUES(15, 3, "Onsdag");
 INSERT INTO Togforekomst VALUES(16, 3, "Tordag");
 INSERT INTO Togforekomst VALUES(17, 3, "Fredag");
 
-INSERT INTO Vognoppsett VALUES(1, 1, 2, 0, 2, 24);
-INSERT INTO Vognoppsett VALUES(2, 2, 2, 1, 1, 20);
-INSERT INTO Vognoppsett VALUES(3, 3, 1, 0, 1, 12);
 
 
-INSERT INTO Vognoppsett VALUES(3, 3, 1, 0, 1, 12);
-INSERT INTO Vognoppsett VALUES(3, 3, 1, 0, 1, 12);
-INSERT INTO Vognoppsett VALUES(3, 3, 1, 0, 1, 12);
-INSERT INTO Vognoppsett VALUES(3, 3, 1, 0, 1, 12);
+INSERT INTO VognType VALUES("SJ-sittevogn-1", True, 12);
+INSERT INTO VognType VALUES("SJ-sovevogn-1", False, 8);
+
+INSERT INTO Vognoppsett VALUES(1, 1, 1, 12, 1, NULL);
+--
+INSERT INTO Vognoppsett VALUES(2, 2, 1, 20, 1, 3);
+INSERT INTO Vognoppsett VALUES(3, 2, 1, 20, 2, NULL);
+--
+INSERT INTO Vognoppsett VALUES(4, 3, 1, 12, 1, NULL);

@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS Kunde;
 DROP TABLE IF EXISTS Togrute;
 DROP TABLE IF EXISTS Strekning;
 DROP TABLE IF EXISTS Delstrekning;
-DROP TABLE IF EXISTS VognTyoe;
+DROP TABLE IF EXISTS VognType;
 DROP TABLE IF EXISTS Jernbanestasjon;
 DROP INDEX IF EXISTS okuperteseter_idstrekning_index;
 DROP INDEX IF EXISTS strekning_idtogrute_idstrekning_index;
@@ -57,18 +57,6 @@ CREATE TABLE Banestrekning(
 );
 
 
-CREATE TABLE Vognoppsett(
-    IDvognOppsett INT NOT NULL,
-    IDtogrute INT NOT NULL,
-    AntallVogner INT NOT NULL,
-    AntallSoveplasser INT NOT NULL,
-    AntallSitteplasser INT NOT NULL,
-    totalplasser INT NOT NULL,
-    PRIMARY KEY(IDvognOppsett),
-    CONSTRAINT vognoppsett_idtogrute_unique UNIQUE(IDtogrute),
-    CONSTRAINT vognoppsett_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute)
-);
-
 
 CREATE TABLE Togforekomst(
     IDtogforekomst INT NOT NULL,
@@ -105,8 +93,8 @@ CREATE TABLE Togrute(
 );
 
 CREATE TABLE Strekning(
-    IDtogrute INT NOT NULL,
     IDstrekning INT NOT NULL,
+    IDtogrute INT NOT NULL,
     UnixAvgang INT NOT NULL,
     UnixAnnkomst INT NOT NULL,
     FirstStrekning BOOLEAN NOT NULL,
@@ -114,7 +102,7 @@ CREATE TABLE Strekning(
     totalplasser INT NOT NULL,
     PRIMARY KEY(IDstrekning),
     CONSTRAINT strekning_IDdelStrekning_foreign FOREIGN KEY(IDdelStrekning) REFERENCES Delstrekning(IDdelStrekning),
-    CONSTRAINT strekning_totalplasser_foreign FOREIGN KEY(totalplasser) REFERENCES Vognoppsett(totalplasser),
+    --CONSTRAINT strekning_totalplasser_foreign FOREIGN KEY(totalplasser) REFERENCES Vognoppsett(totalplasser),
     CONSTRAINT strekning_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute)
 );
 CREATE INDEX strekning_idtogrute_idstrekning_index ON
@@ -132,19 +120,36 @@ CREATE TABLE Delstrekning(
     CONSTRAINT delstrekning_stasjonfra_foreign FOREIGN KEY(StasjonFra) REFERENCES Jernbanestasjon(NavnStasjon),
     CONSTRAINT delstrekning_stasjontil_foreign FOREIGN KEY(StasjonTil) REFERENCES Jernbanestasjon(NavnStasjon)
 );
-CREATE TABLE VognTyoe(
+
+CREATE TABLE Vognoppsett(
     IDvognOppsett INT NOT NULL,
-    IDvognType INT NOT NULL,
-    Sitteplass BOOLEAN NOT NULL,
-    FirstVogn BOOLEAN NOT NULL,
-    IDvognTypeNeste INT NULL,
+    IDtogrute INT NOT NULL,
+    AntallVogner INT NOT NULL,
+    --AntallSoveplasser INT NOT NULL,
+    --AntallSitteplasser INT NOT NULL,
     totalplasser INT NOT NULL,
-    PRIMARY KEY(IDvognType),
-    CONSTRAINT vogntyoe_idvogntypeneste_foreign FOREIGN KEY(IDvognTypeNeste) REFERENCES VognTyoe(IDvognType),
-    CONSTRAINT vogntyoe_idvognoppsett_foreign FOREIGN KEY(IDvognOppsett) REFERENCES Vognoppsett(IDvognOppsett)
+        IDvognTypeCar INT NOT NULL, 
+        IDvognOppsettNeste INT NULL,
+    PRIMARY KEY(IDvognOppsett),
+    --CONSTRAINT vognoppsett_idtogrute_unique UNIQUE(IDtogrute),
+    CONSTRAINT vognoppsett_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute)
 );
-CREATE INDEX vogntyoe_idvognoppsett_index ON
-    VognTyoe(IDvognOppsett);
+
+
+CREATE TABLE VognType(
+    IDvognTypeCar VARCHAR(255) NOT NULL,
+    Sitteplass BOOLEAN NOT NULL,
+    plasser INT NOT NULL,
+    PRIMARY KEY(IDvognTypeCar)
+
+    --CONSTRAINT VognType_idtogrute_foreign FOREIGN KEY(IDtogrute) REFERENCES Togrute(IDtogrute)
+    --IDvognOppsett INT NOT NULL,
+    --FirstVogn BOOLEAN NOT NULL,
+    --IDvognTypeNeste INT NULL,
+    --CONSTRAINT vogntyoe_idvogntypeneste_foreign FOREIGN KEY(IDvognTypeNeste) REFERENCES VognTyoe(IDvognType),
+    --CONSTRAINT vogntyoe_idvognoppsett_foreign FOREIGN KEY(IDvognOppsett) REFERENCES Vognoppsett(IDvognOppsett)
+);
+--CREATE INDEX vogntyoe_idvognoppsett_index ON VognType(IDvognOppsett);
 
 CREATE TABLE Jernbanestasjon(
     IDbaneStrekning INT NOT NULL,
@@ -155,3 +160,4 @@ CREATE TABLE Jernbanestasjon(
 );
 
 
+DELETE FROM Banestrekning WHERE IDbaneStrekning = (1,2,3,4,5)
