@@ -9,5 +9,5 @@ SELECT * FROM Kunde;
 SELECT * FROM Togrute;
 SELECT * FROM Strekning;
 SELECT * FROM Delstrekning;
-SELECT * FROM VognTyoe;
+SELECT * FROM VognType;
 SELECT * FROM Jernbanestasjon;
