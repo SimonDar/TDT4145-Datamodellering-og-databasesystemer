@@ -1,0 +1,30 @@
+Notason:
+	x: Databaseobjekt, post eller blokk
+		r(x): read - leser x
+		w(x): skriver - skriver til x
+		c: commit
+		a: abort
+
+errorer:
+	Dirty read: Leser data som ikke er blitt commitet
+
+	lost update: Det blir T2 som får data i databasern, T1 blir lost 
+				T1: W1(a)				W1(b)C	
+				T2:			W2(a)W2(b)C
+
+	Unrepeatable read: Dataen blir endret mellom to ganger en leser den.
+
+	Incorect summerary: En person gjør beregninger på dataen som en annen gjør oppdateringer på
+
+Recovery - egenslaåer
+	Strict: Hverken lese eller skrive til data som er endret av transaksjoner som ikke er commitet. 
+		*Kan lese data som ikke er endret.
+
+	ACA: Kan ikke lese fra data til tranaskasjoner som ikke er commitet. 
+
+	Gjenopprettbar: Transaksjoner som leser endringer gjort av andre, må committe etter de andre. 
+		*Den som først leser av en verdi som er endret, er den siste til å committe hvis de T går til 2
+
+	Ikke - gjennnopprettbar
+
+	Strict > aca > Gjennoppretbar > alle
