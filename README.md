@@ -1,7 +1,7 @@
 # **Database for jernbanen i Norge**
 ===============	
 # Teste fungsjoner
-For å teste fungsjoner, kan du kopiere og lime inn følgende kommandoer
+For å teste fungsjoner, kan du kopiere og lime inn følgende kommandoer ETTER AT DATABASEN ER INITIERT 
 
 ```
 python3 C_Tog_Innom_Stasjon.py --stasjon "Mo i Rana"
