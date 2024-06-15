@@ -1,7 +1,6 @@
 # **Database for jernbanen i Norge**
-===============
-# Oppgavetekst med markering
-[Dette her er oppgaven med markering av hva jeg syntes er viktig informasjon](https://github.com/SimonDar/TDT4145-Datamodellering-og-databasesystemer/blob/main/QUESTIONS.pdf)
+
+[Dette her er oppgaveteksten med markering av hva jeg syntes er viktig informasjon](https://github.com/SimonDar/TDT4145-Datamodellering-og-databasesystemer/blob/main/QUESTIONS.pdf)
 
 # Teste fungsjoner
 For å teste fungsjoner, kan du kopiere og lime inn følgende kommandoer ETTER AT DATABASEN ER INITIERT 
